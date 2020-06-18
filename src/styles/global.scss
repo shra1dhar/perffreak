@@ -1,0 +1,16 @@
+@import './light_variables.scss';
+@import './dark_variables.scss';
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Source Serif Pro', serif;
+  background-color: var(--pf-bg-color);
+}

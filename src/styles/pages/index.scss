@@ -1,0 +1,123 @@
+@import '../global.scss';
+
+@keyframes line-anim {
+  from {
+    fill: transparent;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+    fill: var(--pf-primary-color);
+    stroke: var(--pf-primary-color);
+  }
+}
+
+@for $i from 1 through 4 {
+  @keyframes orbit#{$i} {
+    from {
+      transform: rotate(0deg) translateX(#{200 + 100*$i}px);
+    }
+
+    to {
+      transform: rotate(-360deg) translateX(#{200 + 100*$i}px);
+    }
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(400px);
+  }
+
+  to {
+    transform: rotate(-360deg) translateX(400px);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(359deg);
+  }
+}
+
+@keyframes up-down {
+  from {
+    transform: translateY(10px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+body {
+  overflow: hidden; // applied on to homepage
+}
+
+.home-page {
+  display: flex;
+  justify-content: center;
+
+  .title {
+    #logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 40px 60px;
+      background-color: rgba(200, 200, 200, 0.4);
+
+      path {
+        @for $i from 0 through 10 {
+          &:nth-child(#{$i}) {
+            stroke-dasharray: 300px;
+            stroke-dashoffset: 300px;
+            animation: line-anim 2s ease forwards #{0.1 * $i}s;
+          }
+        }
+      }
+    }
+
+  }
+
+  .gear-tool {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    left: 50;
+    top: 50;
+    transform: translate(0%, 0%);
+  }
+
+  @for $i from 1 through 4 {
+    .spaceship-#{$i} {
+      right: 5%;
+      position: absolute;
+      bottom: 5%;
+      animation: orbit#{$i} 8s ease-in infinite both #{($i) - 1}s;
+      // animation: orbit 10s linear #{0.5 * $i} infinite;
+
+      svg {
+        transform: scale(0.5);
+      }
+    }
+  }
+
+  .minion {
+    right: 1%;
+    position: absolute;
+    bottom: 5%;
+
+    svg {
+      transform: scale(0.5);
+    }
+  }
+
+  .digital-nomad {
+    z-index: 0;
+  }
+}
